@@ -1,28 +1,29 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('country', {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.sequelize.transaction(async t=>{
+      await queryInterface 
+    await queryInterface.createTable('user_auths', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      email: {
         type: Sequelize.STRING
       },
-      phone_code: {
+      password: {
         type: Sequelize.STRING
       },
-      capital: {
+      salt: {
         type: Sequelize.STRING
       },
-      currency: {
+      status: {
         type: Sequelize.STRING
       },
-      timezone: {
+      activation_pin: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -33,10 +34,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
-  },
+    },{transaction:t});
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('country'); 
+    })
+    
+  },
+  async down(queryInterface, Sequelize) {
+    await queryInterface.sequelize.transaction(async t=>{
+      
+      await queryInterface.dropTable('user_auths',{transaction:t,cascade:true});
+    })
   }
 };

@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         trip_details.belongsTo(models.user_auth,{foreignKey:'user_id'}),
         trip_details.belongsTo(models.trip_type,{foreignKey:'trip_type_id'}),
         trip_details.hasMany(models.trip_days,{foreignKey:'trip_id'}),
-        trip_details.hasMany(models.trip_members,{foreignKey:'trip_id'})
+        trip_details.hasMany(models.trip_members,{foreignKey:'trip_id'}),
+        trip_details.belongsTo(models.user_auth,{foreignKey:'deleted_by'})
       }
   }
 
@@ -27,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
      type: 'TIMESTAMP',
     defaultValue: new Date()},
 
-    deleted_by:DataTypes.STRING,
+    deleted_by:DataTypes.INTEGER,
   },
    {
     sequelize,

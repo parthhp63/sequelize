@@ -5,12 +5,14 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class user_auth extends Model {
     static associate(models) {
-      user_auth.hasOne(models.user_porfile,{foreignKey:'user_id'}),
+      user_auth.hasOne(models.user_profile,{foreignKey:'user_id'}),
       user_auth.hasMany(models.trip_details,{foreignKey:'user_id'}),
-      user_auth.hasOne(models.trip_images,{foreignKey:'deleted_by'}),
-      user_auth.hasOne(models.trip_events,{foreignKey:'created_by'}),
-      user_auth.hasOne(models.trip_members,{foreignKey:'deleted_by'}),
-      user_auth.hasOne(models.trip_members,{foreignKey:'user_id'})
+      user_auth.hasMany(models.trip_images,{foreignKey:'deleted_by'}),
+      user_auth.hasMany(models.trip_events,{foreignKey:'created_by'}),
+      user_auth.hasMany(models.trip_members,{foreignKey:'deleted_by'}),
+      user_auth.hasMany(models.trip_members,{foreignKey:'user_id'}),
+      user_auth.hasMany(models.trip_details,{foreignKey:'trip_details'}),
+      user_auth.hasMany(models.trip_days,{foreignKey:'deleted_by'})
 
 
     }

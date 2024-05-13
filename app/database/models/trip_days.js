@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   class trip_days extends Model {
     static associate(models) {
         trip_days.belongsTo(models.trip_details,{foreignKey:'trip_id'}),
-        trip_days.hasMany(models.trip_images,{foreignKey:'day_id'})
+        trip_days.hasMany(models.trip_images,{foreignKey:'day_id'}),
+        trip_days.belongsTo(models.user_auth,{foreignKey:'deleted_by'})
 
     }
   }
